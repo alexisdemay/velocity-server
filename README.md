@@ -54,7 +54,7 @@ JCDECAUX_API_KEY=XXXXXXXX
 mvn clean install -P docker
 ````
 
-### Deploy
+## Deploy
 1. Récupérer l'archive velocity-<VERSION>.tar.gz générée et la déposer sur le serveur
 2. Lancer les commandes suivantes
 
@@ -66,7 +66,7 @@ docker-compose up -d
 
 Les données sont stockées sur le disque du serveur dans campus-event/postgresql/postgres-data/ (afin d'éviter la perte de données si le conteneur est supprimé).
 
-### Utils
+## Utils
 
 ```bash
 # Lancer les conteneurs
