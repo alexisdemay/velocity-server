@@ -1,0 +1,28 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.0.0 http://maven.apache.org/xsd/assembly-2.0.0.xsd">
+    <id>velocity-maven-assembly</id>
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/velocity/</outputDirectory>
+            <includes>
+                <include>${project.groupId}:${project.artifactId}:jar</include>
+            </includes>
+        </dependencySet>
+    </dependencySets>
+    <fileSets>
+        <fileSet>
+            <outputDirectory>./</outputDirectory>
+            <directory>src/main/docker/</directory>
+            <useDefaultExcludes>false</useDefaultExcludes>
+            <excludes>
+                <exclude>postgre/postgre-data/**</exclude>
+            </excludes>
+            <fileMode>0777</fileMode>
+            <lineEnding>unix</lineEnding>
+            <filtered>false</filtered>
+        </fileSet>
+    </fileSets>
+</assembly>
