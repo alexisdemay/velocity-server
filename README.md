@@ -20,7 +20,7 @@ Le but de cette application est également de découvrir et de tester l'utilisat
 
 ## Setup
 
-1) Ajouter le plugin Lombok : http://mapstruct.org/documentation/ide-support/
+1) Ajouter le plugin Lombok à votre IDE
 2) Récupérer une clef pour utiliser l'API fournit JCDecaux : https://developer.jcdecaux.com/#/signup
 3) Pour lancer l'application Spring Boot via un IDE, ajouter les variables d'environnements suivantes :
     * APP_VERSION=XXXXXX
@@ -32,7 +32,7 @@ Le but de cette application est également de découvrir et de tester l'utilisat
 
 ## Build
 
-1) Cloner le repository depuis GitHub
+1) Cloner le repository
 2) Importer le projet dans un IDE en tant que Maven Project
 3) Se déplacer dans le répertoire suivant : ```/src/main/docker/```
 4) Créer un fichier ```.env``` puis ajouter les paramètres suivants :
@@ -49,6 +49,8 @@ POSTGRES_DB=velocity_db
 # JCDecaux
 JCDECAUX_API_KEY=XXXXXXXX
 ```
+
+Pour finir, builder l'application avec le profil docker :
 
 ```bash
 mvn clean install -P docker
@@ -80,7 +82,7 @@ docker logs -f --tail 100 <CONTAINER_NAME>
 # Arrêter les conteneurs
 docker-compose stop <CONTAINER_NAME>
 
-# /!\ Supprimer tous les conteneurs
+# Supprimer tous les conteneurs
 docker-compose rm -f
 
 # Supprimer toutes les images 
