@@ -1,6 +1,6 @@
 # Velocity (Work in Progress)
 
-Serveur d'application sous Spring Boot qui expose une API REST ayant pour objectif de fournir des services innovants aux usagers de vélos en libre service.
+Serveur d'application sous Spring Boot qui expose une API REST ayant pour objectif de fournir des services aux usagers de vélos en libre service.
 
 Ce projet utilise les données vélos fournis par les APIs exposées par JCDecaux : https://developer.jcdecaux.com/
 
@@ -55,6 +55,7 @@ mvn clean install -P docker
 ````
 
 ## Deploy
+
 1. Récupérer l'archive velocity-<VERSION>.tar.gz générée et la déposer sur le serveur
 2. Lancer les commandes suivantes
 
@@ -63,8 +64,6 @@ tar -xzvf velocity-<VERSION>.tar.gz
 cd velocity
 docker-compose up -d
 ```
-
-Les données sont stockées sur le disque du serveur dans campus-event/postgresql/postgres-data/ (afin d'éviter la perte de données si le conteneur est supprimé).
 
 ## Utils
 
