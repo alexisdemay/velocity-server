@@ -35,10 +35,10 @@ Le but de cette application est également de découvrir et de tester l'utilisat
 1) Cloner le repository
 2) Importer le projet dans un IDE en tant que Maven Project
 3) Se déplacer dans le répertoire suivant : ```/src/main/docker/```
-4) Créer un fichier ```.env``` puis ajouter les paramètres suivants :
+5) Créer un fichier ```.env``` puis ajouter les paramètres suivants :
 ```
 # Application
-APP_VERSION=0.0.1-SNAPSHOT
+APP_VERSION=<VERSION>
 APP_NAME=velocity
 
 # PostegreSQL

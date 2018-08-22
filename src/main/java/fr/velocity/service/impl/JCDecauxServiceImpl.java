@@ -1,4 +1,4 @@
-package fr.velocity.service;
+package fr.velocity.service.impl;
 
 import fr.velocity.client.JCDecauxClient;
 import fr.velocity.model.Contract;
@@ -6,6 +6,7 @@ import fr.velocity.model.Station;
 import fr.velocity.model.StatsStations;
 import fr.velocity.model.Status;
 import fr.velocity.repository.StatsStationsRepository;
+import fr.velocity.service.JCDecauService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -14,7 +15,7 @@ import reactor.core.publisher.Mono;
 import java.util.Optional;
 
 @Service
-public class JCDecauxService {
+public class JCDecauxServiceImpl implements JCDecauService {
 
     @Autowired
     private JCDecauxClient jcDecauxClient;
@@ -22,18 +23,22 @@ public class JCDecauxService {
     @Autowired
     private StatsStationsRepository statsStationsRepository;
 
+    @Override
     public Flux<Contract> listContracts() {
         return jcDecauxClient.listContracts();
     }
 
+    @Override
     public Flux<Station> listStations(Optional<String> contractName) {
         return contractName.isPresent() ? jcDecauxClient.listStationsByContract(contractName.get()) : jcDecauxClient.listStations();
     }
 
+    @Override
     public Mono<Long> countStations(Optional<String> contractName) {
         return contractName.isPresent() ? jcDecauxClient.listStationsByContract(contractName.get()).count() : jcDecauxClient.listStations().count();
     }
 
+    @Override
     public Mono<StatsStations> statsStations(Optional<String> contractName) {
 
         Flux<Station> stations = contractName.isPresent() ? listStations(Optional.of(contractName.get())) : listStations(Optional.empty());
