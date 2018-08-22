@@ -3,11 +3,14 @@ package fr.velocity.rest;
 import fr.velocity.model.Contract;
 import fr.velocity.model.Station;
 import fr.velocity.model.StatsStations;
-import fr.velocity.service.JCDecauxService;
+import fr.velocity.service.JCDecauService;
 import io.prometheus.client.Counter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -19,7 +22,7 @@ import java.util.Optional;
 public class JCDecauxController {
 
     @Autowired
-    private JCDecauxService jcDecauxService;
+    private JCDecauService jcDecauxService;
 
     private Counter counterStatsStationRequest = Counter
             .build()
