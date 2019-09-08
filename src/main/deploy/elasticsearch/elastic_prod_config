@@ -1,0 +1,5 @@
+APP_VERSION=7.3.1
+APP_NAME=elasticsearch
+APP_FILE=/opt/velocity/Elastic/elasticsearch-7.3.1/bin/elasticsearch
+PID_FILE=/opt/velocity/Elastic/elastic.pid
+LOCK_FILE=/opt/velocity/Elastic/elastic.lock

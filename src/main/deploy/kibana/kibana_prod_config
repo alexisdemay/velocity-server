@@ -1,0 +1,6 @@
+APP_VERSION=7.3.1
+APP_NAME=kibana
+APP_FILE=/opt/velocity/Kibana/kibana-7.3.1-linux-x86_64/bin/kibana
+APP_LOG=/opt/velocity/data/logs/kibana.log
+PID_FILE=/opt/velocity/Kibana/kibana.pid
+LOCK_FILE=/opt/velocity/Kibana/kibana.lock

@@ -8,9 +8,12 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
-public class TimestampDeserialization extends StdDeserializer<LocalDateTime> {
+public class TimestampDeserialization extends StdDeserializer<Instant> {
 
     private static final long serialVersionUID = -8470889780234660047L;
 
@@ -23,9 +26,8 @@ public class TimestampDeserialization extends StdDeserializer<LocalDateTime> {
     }
 
     @Override
-    public LocalDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
-        return LocalDateTime.ofInstant(Instant.ofEpochMilli(Long.valueOf(jsonParser.getText())),
-                TimeZone.getDefault().toZoneId());
+    public Instant deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+        return Instant.parse(jsonParser.getText());
     }
 
 }

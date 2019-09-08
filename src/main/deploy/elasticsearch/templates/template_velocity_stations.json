@@ -1,0 +1,108 @@
+{
+  "index_patterns": "velocity-stations",
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+  },
+  "mappings" : {
+    "dynamic": "strict",
+    "properties" : {
+      "address" : {
+        "type" : "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        }
+      },
+      "banking" : {
+        "type" : "boolean"
+      },
+      "bonus" : {
+        "type" : "boolean"
+      },
+      "connected" : {
+        "type" : "boolean"
+      },
+      "contract_name" : {
+        "type" : "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        }
+      },
+      "last_update" : {
+        "type" : "date"
+      },
+      "main_stands" : {
+        "properties" : {
+          "availabilities" : {
+            "properties" : {
+              "bikes" : {
+                "type" : "long"
+              },
+              "stands" : {
+                "type" : "long"
+              }
+            }
+          },
+          "capacity" : {
+            "type" : "long"
+          }
+        }
+      },
+      "name" : {
+        "type" : "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        }
+      },
+      "number" : {
+        "type" : "long"
+      },
+      "overflow" : {
+        "type" : "boolean"
+      },
+      "position" : {
+        "type": "geo_point"
+      },
+      "status" : {
+        "type" : "text",
+        "fields" : {
+          "keyword" : {
+            "type" : "keyword",
+            "ignore_above" : 256
+          }
+        }
+      },
+      "total_stands" : {
+        "properties" : {
+          "availabilities" : {
+            "properties" : {
+              "bikes" : {
+                "type" : "long"
+              },
+              "stands" : {
+                "type" : "long"
+              }
+            }
+          },
+          "capacity" : {
+            "type" : "long"
+          }
+        }
+      }
+    }
+  },
+  "aliases": {
+    "velocity-stations-alias": {},
+    "velocity-stations-alias-read": {},
+    "velocity-stations-alia-write": {}
+  }
+}

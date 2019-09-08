@@ -1,0 +1,15 @@
+# Script variables
+APP_VERSION=1.0.0-SNAPSHOT
+APP_NAME=velocity
+APP_JAVA_OPTS=-Xms512m -Xmx512m
+APP_FILE=/Users/ademay/Desktop/Projets/velocity/velocity-server/target/${APP_NAME}-${APP_VERSION}.jar
+PID_FILE=/Users/ademay/Desktop/Projets/velocity/velocity-server/src/main/deployment/velocity/velocity.pid
+LOCK_FILE=/Users/ademay/Desktop/Projets/velocity/velocity-server/src/main/deployment/velocity/velocity.lock
+
+# App variables
+export JCDECAUX_API_KEY=
+export LOGS_PATH='/Users/ademay/Desktop/Projets/velocity/velocity-server/src/main/data/logs'
+export ELASTIC_USERNAME='elastic'
+export ELASTIC_PASSWORD=
+export ELASTIC_HOST=
+export ELASTIC_PORT='9200'

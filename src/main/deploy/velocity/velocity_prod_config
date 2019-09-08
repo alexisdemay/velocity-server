@@ -1,0 +1,15 @@
+# Script variables
+APP_VERSION=
+APP_NAME=
+APP_JAVA_OPTS=
+APP_FILE=
+PID_FILE=
+LOCK_FILE=
+
+# App variables
+export JCDECAUX_API_KEY=
+export LOGS_PATH=
+export ELASTIC_USERNAME=
+export ELASTIC_PASSWORD=
+export ELASTIC_HOST=
+export ELASTIC_PORT=

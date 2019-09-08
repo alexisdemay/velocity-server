@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>
+        %-30(%black(%d{dd-MM-yyyy HH:mm:ss.SSS}) [%green(%t)] %highlight(%-5level) %yellow(%logger{15})) - %msg%n%throwable
+      </Pattern>
+    </layout>
+  </appender>
+
+  <appender name="RollingLogFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOGS_PATH}/log-velocity.log</file>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <Pattern>
+        %d{dd-MM-yyyy HH:mm:ss.SSS} [%t] %-5level %logger{15} - %msg%n%throwable
+      </Pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOGS_PATH}/archived/log-velocity-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>10MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+  </appender>
+
+  <appender name="RollingJsonFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOGS_PATH}/log-velocity.json</file>
+    <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+      <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+        <timestampFormat>dd-MM-yyyy'T'HH:mm:ss.SSSX</timestampFormat>
+        <timestampFormatTimezoneId>Etc/UTC</timestampFormatTimezoneId>
+        <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+          <prettyPrint>false</prettyPrint>
+        </jsonFormatter>
+      </layout>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${LOGS_PATH}/archived/log-velocity-%d{yyyy-MM-dd}.%i.json</fileNamePattern>
+      <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+        <maxFileSize>10MB</maxFileSize>
+      </timeBasedFileNamingAndTriggeringPolicy>
+    </rollingPolicy>
+  </appender>
+
+  <root level="info">
+    <appender-ref ref="RollingLogFile"/>
+    <appender-ref ref="RollingJsonFile"/>
+    <appender-ref ref="Console"/>
+  </root>
+
+  <logger name="fr.velocity" level="info" additivity="false">
+    <appender-ref ref="RollingLogFile"/>
+    <appender-ref ref="RollingJsonFile"/>
+    <appender-ref ref="Console"/>
+  </logger>
+
+</configuration>

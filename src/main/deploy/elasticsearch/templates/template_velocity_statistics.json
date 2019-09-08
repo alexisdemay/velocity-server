@@ -1,0 +1,81 @@
+{
+  "index_patterns": "velocity-statistics",
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+  },
+  "mappings" : {
+    "dynamic": "strict",
+    "properties" : {
+      "contract" : {
+        "properties" : {
+          "cities" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "commercial_name" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "country_code" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          },
+          "name" : {
+            "type" : "text",
+            "fields" : {
+              "keyword" : {
+                "type" : "keyword",
+                "ignore_above" : 256
+              }
+            }
+          }
+        }
+      },
+      "total_stations" : {
+        "type" : "long"
+      },
+      "total_open_stations" : {
+        "type" : "long"
+      },
+      "total_closed_stations" : {
+        "type" : "long"
+      },
+      "total_bikes_capacity" : {
+        "type" : "long"
+      },
+      "total_bikes_available" : {
+        "type" : "long"
+      },
+      "total_bikes_used" : {
+        "type" : "long"
+      },
+      "total_stands_available" : {
+        "type" : "long"
+      },
+      "last_update" : {
+        "type" : "date"
+      }
+    }
+  },
+  "aliases": {
+    "velocity-statistics-alias": {},
+    "velocity-statistics-alias-read": {},
+    "velocity-statistics-alia-write": {}
+  }
+}

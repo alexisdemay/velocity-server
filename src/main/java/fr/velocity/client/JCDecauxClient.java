@@ -14,9 +14,9 @@ import reactor.core.publisher.Flux;
 @Service
 public class JCDecauxClient {
 
-    private static final String PARAM_API_KEY = "?apiKey={apiKey}";
-    private static final String URI_LIST_CONTRACTS = "/contracts" + PARAM_API_KEY;
-    private static final String URI_LIST_STATIONS = "/stations" + PARAM_API_KEY;
+    private static final String PARAM_API_KEY = "apiKey={apiKey}";
+    private static final String URI_LIST_CONTRACTS = "/contracts?" + PARAM_API_KEY;
+    private static final String URI_LIST_STATIONS = "/stations?" + PARAM_API_KEY;
     private static final String URI_LIST_STATIONS_BY_CONTRACT = URI_LIST_STATIONS + "&contract={contractName}";
 
     private final WebClient webClient;
@@ -57,7 +57,7 @@ public class JCDecauxClient {
         return (clientRequest, next) -> {
             log.info("Request: {} {}", clientRequest.method(), clientRequest.url());
             clientRequest.headers()
-                    .forEach((name, values) -> values.forEach(value -> log.info("{}={}", name, value)));
+                    .forEach((name, values) -> values.forEach(value -> log.debug("{}={}", name, value)));
             return next.exchange(clientRequest);
         };
     }

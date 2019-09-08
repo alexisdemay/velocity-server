@@ -1,0 +1,43 @@
+{
+  "attributes":{
+    "description":"",
+    "hits":0,
+    "kibanaSavedObjectMeta":{
+      "searchSourceJSON":"{\"query\":{\"language\":\"kuery\",\"query\":\"\"},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"controlledBy\":\"1562428557854\",\"disabled\":false,\"key\":\"contract.cities.keyword\",\"negate\":false,\"params\":{\"query\":\"Toulouse\"},\"type\":\"phrase\",\"value\":\"Toulouse\",\"indexRefName\":\"kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index\"},\"query\":{\"match\":{\"contract.cities.keyword\":{\"query\":\"Toulouse\",\"type\":\"phrase\"}}}}]}"
+    },
+    "optionsJSON":"{\"hidePanelTitles\":false,\"useMargins\":true}",
+    "panelsJSON":"[{\"embeddableConfig\":{},\"gridData\":{\"x\":0,\"y\":13,\"w\":48,\"h\":16,\"i\":\"3\"},\"panelIndex\":\"3\",\"version\":\"7.2.0\",\"panelRefName\":\"panel_0\"},{\"embeddableConfig\":{},\"gridData\":{\"x\":0,\"y\":0,\"w\":18,\"h\":13,\"i\":\"5\"},\"panelIndex\":\"5\",\"version\":\"7.2.0\",\"panelRefName\":\"panel_1\"},{\"embeddableConfig\":{\"vis\":{\"colors\":{\"Bikes Used\":\"#EF843C\"}}},\"gridData\":{\"x\":18,\"y\":0,\"w\":30,\"h\":13,\"i\":\"6\"},\"panelIndex\":\"6\",\"version\":\"7.2.0\",\"panelRefName\":\"panel_2\"}]",
+    "timeRestore":false,
+    "title":"Stats Dashboard",
+    "version":1
+  },
+  "id":"0fdcbad0-a007-11e9-8e2f-a7f9aa11a913",
+  "migrationVersion":{
+    "dashboard":"7.0.0"
+  },
+  "references":[
+    {
+      "id":"88c459e0-a02e-11e9-8e2f-a7f9aa11a913",
+      "name":"kibanaSavedObjectMeta.searchSourceJSON.filter[0].meta.index",
+      "type":"index-pattern"
+    },
+    {
+      "id":"b31d02c0-a00e-11e9-8e2f-a7f9aa11a913",
+      "name":"panel_0",
+      "type":"visualization"
+    },
+    {
+      "id":"b3579460-a006-11e9-8e2f-a7f9aa11a913",
+      "name":"panel_1",
+      "type":"visualization"
+    },
+    {
+      "id":"83bc7e00-a010-11e9-8e2f-a7f9aa11a913",
+      "name":"panel_2",
+      "type":"visualization"
+    }
+  ],
+  "type":"dashboard",
+  "updated_at":"2019-07-06T17:37:02.262Z",
+  "version":"WzcxLDFd"
+}

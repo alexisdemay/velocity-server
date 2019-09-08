@@ -1,0 +1,26 @@
+{
+  "attributes":{
+    "description":"",
+    "kibanaSavedObjectMeta":{
+      "searchSourceJSON":"{\"query\":{\"language\":\"kuery\",\"query\":\"\"},\"filter\":[],\"indexRefName\":\"kibanaSavedObjectMeta.searchSourceJSON.index\"}"
+    },
+    "title":"Bikes Used Stats",
+    "uiStateJSON":"{}",
+    "version":1,
+    "visState":"{\"aggs\":[{\"enabled\":true,\"id\":\"1\",\"params\":{\"customLabel\":\"Bikes Used\",\"field\":\"total_bikes_used\"},\"schema\":\"metric\",\"type\":\"avg\"},{\"enabled\":true,\"id\":\"2\",\"params\":{\"customLabel\":\"Timeslot\",\"drop_partials\":false,\"extended_bounds\":{},\"field\":\"last_update\",\"interval\":\"auto\",\"min_doc_count\":1,\"timeRange\":{\"from\":\"2019-07-06T16:44:36.189Z\",\"to\":\"now\"},\"useNormalizedEsInterval\":true},\"schema\":\"segment\",\"type\":\"date_histogram\"},{\"enabled\":true,\"id\":\"3\",\"params\":{\"customLabel\":\"Bikes Available\",\"field\":\"total_bikes_available\"},\"schema\":\"metric\",\"type\":\"avg\"},{\"enabled\":true,\"id\":\"4\",\"params\":{\"customLabel\":\"Stands Available\",\"field\":\"total_stands_available\"},\"schema\":\"metric\",\"type\":\"avg\"},{\"enabled\":true,\"id\":\"5\",\"params\":{\"customLabel\":\"Cities\",\"field\":\"contract.cities.keyword\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"order\":\"desc\",\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"size\":5},\"schema\":\"group\",\"type\":\"terms\"},{\"enabled\":true,\"id\":\"6\",\"params\":{\"customLabel\":\"Open Stations\",\"field\":\"total_open_stations\"},\"schema\":\"metric\",\"type\":\"avg\"},{\"enabled\":true,\"id\":\"7\",\"params\":{\"field\":\"total_closed_stations\"},\"schema\":\"metric\",\"type\":\"avg\"}],\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"categoryAxes\":[{\"id\":\"CategoryAxis-1\",\"labels\":{\"show\":true,\"truncate\":100},\"position\":\"bottom\",\"scale\":{\"type\":\"linear\"},\"show\":true,\"style\":{},\"title\":{},\"type\":\"category\"}],\"dimensions\":{\"series\":[{\"accessor\":1,\"aggType\":\"terms\",\"format\":{\"id\":\"terms\",\"params\":{\"id\":\"string\",\"missingBucketLabel\":\"Missing\",\"otherBucketLabel\":\"Other\"}},\"params\":{}}],\"x\":{\"accessor\":0,\"aggType\":\"date_histogram\",\"format\":{\"id\":\"date\",\"params\":{\"pattern\":\"HH:mm:ss\"}},\"params\":{\"bounds\":{\"max\":\"2019-07-06T17:16:42.319Z\",\"min\":\"2019-07-06T16:44:36.189Z\"},\"date\":true,\"format\":\"HH:mm:ss\",\"interval\":\"PT30S\"}},\"y\":[{\"accessor\":2,\"aggType\":\"avg\",\"format\":{\"id\":\"number\"},\"params\":{}},{\"accessor\":3,\"aggType\":\"avg\",\"format\":{\"id\":\"number\"},\"params\":{}},{\"accessor\":4,\"aggType\":\"avg\",\"format\":{\"id\":\"number\"},\"params\":{}}]},\"grid\":{\"categoryLines\":false},\"legendPosition\":\"right\",\"seriesParams\":[{\"data\":{\"id\":\"1\",\"label\":\"Bikes Used\"},\"drawLinesBetweenPoints\":true,\"mode\":\"normal\",\"show\":\"true\",\"showCircles\":false,\"type\":\"line\",\"valueAxis\":\"ValueAxis-1\"},{\"data\":{\"id\":\"3\",\"label\":\"Bikes Available\"},\"drawLinesBetweenPoints\":true,\"mode\":\"normal\",\"show\":true,\"showCircles\":false,\"type\":\"line\",\"valueAxis\":\"ValueAxis-1\"},{\"data\":{\"id\":\"4\",\"label\":\"Stands Available\"},\"drawLinesBetweenPoints\":true,\"interpolate\":\"linear\",\"mode\":\"normal\",\"show\":true,\"showCircles\":false,\"type\":\"line\",\"valueAxis\":\"ValueAxis-1\"},{\"data\":{\"id\":\"6\",\"label\":\"Open Stations\"},\"drawLinesBetweenPoints\":true,\"interpolate\":\"linear\",\"mode\":\"normal\",\"show\":true,\"showCircles\":false,\"type\":\"line\",\"valueAxis\":\"ValueAxis-1\"},{\"data\":{\"id\":\"7\",\"label\":\"Average total_closed_stations\"},\"drawLinesBetweenPoints\":true,\"interpolate\":\"linear\",\"mode\":\"normal\",\"show\":true,\"showCircles\":false,\"type\":\"line\",\"valueAxis\":\"ValueAxis-1\"}],\"times\":[],\"type\":\"line\",\"valueAxes\":[{\"id\":\"ValueAxis-1\",\"labels\":{\"filter\":false,\"rotate\":0,\"show\":true,\"truncate\":100},\"name\":\"LeftAxis-1\",\"position\":\"left\",\"scale\":{\"mode\":\"normal\",\"type\":\"linear\"},\"show\":true,\"style\":{},\"title\":{\"text\":\"Bikes Used\"},\"type\":\"value\"}]},\"title\":\"Bikes Used Stats\",\"type\":\"line\"}"
+  },
+  "id":"83bc7e00-a010-11e9-8e2f-a7f9aa11a913",
+  "migrationVersion":{
+    "visualization":"7.2.0"
+  },
+  "references":[
+    {
+      "id":"88c459e0-a02e-11e9-8e2f-a7f9aa11a913",
+      "name":"kibanaSavedObjectMeta.searchSourceJSON.index",
+      "type":"index-pattern"
+    }
+  ],
+  "type":"visualization",
+  "updated_at":"2019-07-06T18:38:23.099Z",
+  "version":"WzczLDFd"
+}

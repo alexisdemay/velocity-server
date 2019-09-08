@@ -1,16 +1,21 @@
 package fr.velocity.config;
 
-import io.prometheus.client.exporter.MetricsServlet;
-import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class AppConfig {
 
+    public static final String PROFIL_DEV = "dev";
+
+    public static final String PROFIL_PROD = "prod";
+
+    public static final String PROFIL_DOCKER = "docker";
+
     @Bean
-    public ServletRegistrationBean registerPrometheusExporterServlet() {
-        return new ServletRegistrationBean(new MetricsServlet(), "/metrics");
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 
 }

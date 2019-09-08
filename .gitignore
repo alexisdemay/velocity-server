@@ -17,6 +17,6 @@ src/main/docker/\.env
 
 \.mvn/wrapper/
 
-src/main/docker/postgre/postgre-data/
+src/main/docker/elasticsearch/data/
 target/
 \.idea/

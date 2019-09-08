@@ -1,0 +1,26 @@
+{
+  "attributes":{
+    "description":"",
+    "kibanaSavedObjectMeta":{
+      "searchSourceJSON":"{\"query\":{\"language\":\"kuery\",\"query\":\"\"},\"filter\":[],\"indexRefName\":\"kibanaSavedObjectMeta.searchSourceJSON.index\"}"
+    },
+    "title":"Stats Vizualisation",
+    "uiStateJSON":"{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":3,\"direction\":\"desc\"}}}}",
+    "version":1,
+    "visState":"{\"title\":\"Stats Vizualisation\",\"type\":\"table\",\"params\":{\"dimensions\":{\"metrics\":[{\"accessor\":4,\"format\":{\"id\":\"number\"},\"params\":{},\"aggType\":\"avg\"},{\"accessor\":5,\"format\":{\"id\":\"number\"},\"params\":{},\"aggType\":\"avg\"},{\"accessor\":6,\"format\":{\"id\":\"number\"},\"params\":{},\"aggType\":\"avg\"},{\"accessor\":7,\"format\":{\"id\":\"number\"},\"params\":{},\"aggType\":\"avg\"},{\"accessor\":8,\"format\":{\"id\":\"number\"},\"params\":{},\"aggType\":\"avg\"},{\"accessor\":9,\"format\":{\"id\":\"number\"},\"params\":{},\"aggType\":\"avg\"},{\"accessor\":10,\"format\":{\"id\":\"number\"},\"params\":{},\"aggType\":\"avg\"}],\"buckets\":[{\"accessor\":0,\"format\":{\"id\":\"date\",\"params\":{\"pattern\":\"HH:mm\"}},\"params\":{},\"aggType\":\"date_histogram\"},{\"accessor\":1,\"format\":{\"id\":\"terms\",\"params\":{\"id\":\"string\",\"otherBucketLabel\":\"Other\",\"missingBucketLabel\":\"Missing\"}},\"params\":{},\"aggType\":\"terms\"},{\"accessor\":2,\"format\":{\"id\":\"terms\",\"params\":{\"id\":\"string\",\"otherBucketLabel\":\"Other\",\"missingBucketLabel\":\"Missing\"}},\"params\":{},\"aggType\":\"terms\"},{\"accessor\":3,\"format\":{\"id\":\"terms\",\"params\":{\"id\":\"string\",\"otherBucketLabel\":\"Other\",\"missingBucketLabel\":\"Missing\"}},\"params\":{},\"aggType\":\"terms\"}]},\"perPage\":10,\"showMetricsAtAllLevels\":false,\"showPartialRows\":false,\"showTotal\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"totalFunc\":\"sum\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"total_stations\",\"customLabel\":\"Stations\"}},{\"id\":\"4\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"total_open_stations\",\"customLabel\":\"Open Stations\"}},{\"id\":\"5\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"total_closed_stations\",\"customLabel\":\"Closed Stations\"}},{\"id\":\"6\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"total_bikes_available\",\"customLabel\":\"Bikes Available\"}},{\"id\":\"7\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"total_bikes_used\",\"customLabel\":\"Bikes Used\"}},{\"id\":\"8\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"total_stands_available\",\"customLabel\":\"Available Stands\"}},{\"id\":\"9\",\"enabled\":true,\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"total_bikes_capacity\",\"customLabel\":\"Bikes Capacity\"}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"contract.name.keyword\",\"order\":\"asc\",\"size\":100,\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Contract\"}},{\"id\":\"3\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"contract.country_code.keyword\",\"order\":\"desc\",\"size\":100,\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Country code\"}},{\"id\":\"10\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"contract.cities.keyword\",\"order\":\"desc\",\"size\":50,\"orderBy\":\"1\",\"otherBucket\":false,\"otherBucketLabel\":\"Other\",\"missingBucket\":false,\"missingBucketLabel\":\"Missing\",\"customLabel\":\"Cities\"}},{\"id\":\"11\",\"enabled\":true,\"type\":\"date_histogram\",\"schema\":\"bucket\",\"params\":{\"field\":\"last_update\",\"timeRange\":{\"from\":\"2019-07-06T16:44:36.189Z\",\"to\":\"now\"},\"useNormalizedEsInterval\":true,\"interval\":\"auto\",\"drop_partials\":false,\"min_doc_count\":1,\"extended_bounds\":{},\"customLabel\":\"Update\"}}]}"
+  },
+  "id":"b31d02c0-a00e-11e9-8e2f-a7f9aa11a913",
+  "migrationVersion":{
+    "visualization":"7.2.0"
+  },
+  "references":[
+    {
+      "id":"88c459e0-a02e-11e9-8e2f-a7f9aa11a913",
+      "name":"kibanaSavedObjectMeta.searchSourceJSON.index",
+      "type":"index-pattern"
+    }
+  ],
+  "type":"visualization",
+  "updated_at":"2019-07-06T17:37:59.150Z",
+  "version":"WzcyLDFd"
+}

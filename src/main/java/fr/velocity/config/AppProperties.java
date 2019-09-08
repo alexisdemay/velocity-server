@@ -12,11 +12,8 @@ public class AppProperties {
 
     @Data
     public static class JCDecaux {
-
         private String baseUrl;
-
         private String apiKey;
-
     }
 
 }

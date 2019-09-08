@@ -1,0 +1,5 @@
+APP_VERSION=7.3.1
+APP_NAME=elasticsearch
+APP_FILE=/Users/ademay/Desktop/Projets/tools/elasticsearch-7.2.0/bin/elasticsearch
+PID_FILE=/Users/ademay/Desktop/Projets/tools/elasticsearch-7.2.0/elastic.pid
+LOCK_FILE=/Users/ademay/Desktop/Projets/tools/elasticsearch-7.2.0/elastic.lock

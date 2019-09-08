@@ -17,13 +17,17 @@ public class Contract {
     @JsonProperty("name")
     private String name;
 
-    @JsonProperty("commercialName")
+    @JsonProperty("commercial_name")
     private String commercialName;
 
-    @JsonProperty("countryCode")
+    @JsonProperty("country_code")
     private String countryCode;
 
     @JsonProperty("cities")
     private List<String> cities;
+
+    public static Contract unknown() {
+        return new Contract("unknown", "unknown", "unknown", null);
+    }
 
 }

@@ -4,24 +4,21 @@ import fr.velocity.client.JCDecauxClient;
 import fr.velocity.model.Contract;
 import fr.velocity.model.Station;
 import fr.velocity.model.StatsStations;
-import fr.velocity.model.Status;
-import fr.velocity.repository.StatsStationsRepository;
-import fr.velocity.service.JCDecauService;
+import fr.velocity.service.JCDecauxService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
-
 @Service
-public class JCDecauxServiceImpl implements JCDecauService {
+public class JCDecauxServiceImpl implements JCDecauxService {
 
     @Autowired
     private JCDecauxClient jcDecauxClient;
-
-    @Autowired
-    private StatsStationsRepository statsStationsRepository;
 
     @Override
     public Flux<Contract> listContracts() {
@@ -30,48 +27,51 @@ public class JCDecauxServiceImpl implements JCDecauService {
 
     @Override
     public Flux<Station> listStations(Optional<String> contractName) {
-        return contractName.isPresent() ? jcDecauxClient.listStationsByContract(contractName.get()) : jcDecauxClient.listStations();
+        return contractName.isPresent() ? jcDecauxClient.listStationsByContract(contractName.get())
+                : jcDecauxClient.listStations();
     }
 
     @Override
     public Mono<Long> countStations(Optional<String> contractName) {
-        return contractName.isPresent() ? jcDecauxClient.listStationsByContract(contractName.get()).count() : jcDecauxClient.listStations().count();
+        return contractName.isPresent() ? jcDecauxClient.listStationsByContract(contractName.get())
+                .count() : jcDecauxClient.listStations().count();
     }
 
     @Override
-    public Mono<StatsStations> statsStations(Optional<String> contractName) {
+    public List<StatsStations> statsStations(Optional<String> contractName) {
 
-        Flux<Station> stations = contractName.isPresent() ? listStations(Optional.of(contractName.get())) : listStations(Optional.empty());
+        Flux<Station> stations =
+                contractName.isPresent() ? listStations(Optional.of(contractName.get()))
+                        : listStations(Optional.empty());
+        Flux<Contract> listOfContracts = listContracts();
 
-        return stations.collectList().map(listStations -> {
+        List<StatsStations> stats = new ArrayList<>();
 
-            StatsStations stats;
+        if (contractName.isPresent() && !contractName.get().equals("*")) {
+            Contract contract = listOfContracts
+                    .toStream()
+                    .filter(c -> contractName.get().equals(c.getName()))
+                    .findFirst()
+                    .orElse(Contract.unknown());
+            stats.add(
+                    StatsStations.generateStatsFromStationsAndContract(stations.toStream().collect(
+                            Collectors.toList()), contract));
+        } else {
+            stations
+                    .toStream()
+                    .filter(station -> station.getContractName() != null)
+                    .collect(Collectors.groupingBy(Station::getContractName))
+                    .forEach((cn, listOfStations) -> {
+                        Contract contract = listOfContracts
+                                .toStream()
+                                .filter(c -> cn.equals(c.getName()))
+                                .findFirst()
+                                .orElse(Contract.unknown());
+                        stats.add(StatsStations.generateStatsFromStationsAndContract(listOfStations, contract));
+                    });
+        }
 
-            if (contractName.isPresent()) {
-                stats = new StatsStations(contractName.get(), 0, 0, 0, 0, 0);
-            } else {
-                stats = new StatsStations("all", 0, 0, 0, 0, 0);
-            }
-
-            listStations.stream().forEach(station -> {
-
-                stats.setTotalBikes(station.getBikeStands() + stats.getTotalBikes());
-                stats.setTotalAvailableBike(station.getAvailableBikes() + stats.getTotalAvailableBike());
-                stats.setTotalStations(stats.getTotalStations() + 1);
-
-                if (Status.OPEN.equals(station.getStatus())) {
-                    stats.setTotalOpenStations(stats.getTotalOpenStations() + 1);
-                } else {
-                    stats.setTotalClosedStations(stats.getTotalClosedStations() + 1);
-                }
-
-            });
-
-            statsStationsRepository.save(new fr.velocity.entity.StatsStations(stats));
-
-            return stats;
-
-        });
+        return stats;
 
     }
 

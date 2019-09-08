@@ -6,7 +6,13 @@
     <includeBaseDirectory>true</includeBaseDirectory>
     <dependencySets>
         <dependencySet>
-            <outputDirectory>/velocity/</outputDirectory>
+            <outputDirectory>./deploy/velocity/</outputDirectory>
+            <includes>
+                <include>${project.groupId}:${project.artifactId}:jar</include>
+            </includes>
+        </dependencySet>
+        <dependencySet>
+            <outputDirectory>./docker/velocity/</outputDirectory>
             <includes>
                 <include>${project.groupId}:${project.artifactId}:jar</include>
             </includes>
@@ -14,12 +20,19 @@
     </dependencySets>
     <fileSets>
         <fileSet>
-            <outputDirectory>./</outputDirectory>
+            <outputDirectory>./docker/</outputDirectory>
             <directory>src/main/docker/</directory>
             <useDefaultExcludes>false</useDefaultExcludes>
             <excludes>
-                <exclude>postgre/postgre-data/**</exclude>
+                <exclude>elasticsearch/data/**</exclude>
             </excludes>
+            <fileMode>0777</fileMode>
+            <lineEnding>unix</lineEnding>
+            <filtered>false</filtered>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>./deploy/</outputDirectory>
+            <directory>src/main/deploy/</directory>
             <fileMode>0777</fileMode>
             <lineEnding>unix</lineEnding>
             <filtered>false</filtered>
