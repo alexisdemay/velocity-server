@@ -2,6 +2,21 @@
 
 ![Contributors](https://img.shields.io/badge/contributors-Alexis%20DEMAY-blue.svg)
 
+## Table of Contents
+
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Usage](#usage)
+  * [Docker](#docker)
+* [Help](#help)
+  * [Docker](#docker)
+  * [Elasticsearch](#elasticsearh)
+  * [Kibana](#kibana)
+  * [Velocity](#velocity)
+  
 ## About The Project
 
 Spring Boot server that uses JCDecaux API to perform statistics and vizualize them in Kibana.
