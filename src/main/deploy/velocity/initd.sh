@@ -61,7 +61,7 @@ start() {
 	echo -n $'\e[32m'
 	echo "Starting..."
 	echo -n $'\e[0m'
-	java -jar $APP_FILE -p ${PID_FILE} ${APP_JAVA_OPTS} &
+	java ${APP_JAVA_OPTS} -jar $APP_FILE -p ${PID_FILE} &
 	EXIT_VAL=$?
 	if [ $EXIT_VAL = 0 ]; then
 		touch ${LOCK_FILE}

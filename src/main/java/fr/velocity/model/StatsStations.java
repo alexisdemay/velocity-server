@@ -57,8 +57,8 @@ public class StatsStations {
                     station.getMainStands().getAvailabilities().getBikes());
             stats.increaseStandsAvailable(
                     station.getMainStands().getAvailabilities().getStands());
-            stats.updateBikesUsed();
         });
+        stats.updateBikesUsed();
         return stats;
     }
 
