@@ -16,8 +16,13 @@
   * [Elasticsearch](#elasticsearh)
   * [Kibana](#kibana)
   * [Velocity](#velocity)
+* [Roadmap](#roadmap)
   
 ## About The Project
+
+<p align="center">
+  <img width="100%" height="100%" src="https://github.com/alexisdemay/velocity-server/blob/master/img/kibana_dashboard_velocity_statistics.png">
+</p>
 
 Spring Boot server that uses JCDecaux API to perform statistics and vizualize them in Kibana.
 
@@ -135,3 +140,16 @@ docker ps
 ./initd.sh -c <PATH_TO_VELOCITY_CONFIG> start|stop|restart
 ./initd.sh -c /Users/ademay/Desktop/Projets/velocity/velocity-server/src/main/deploy/elasticsearch/velocity_dev_config start
 ```
+
+## Roadmap
+
+- [ ] Create a script to initialize data:
+    * Create a policy for the lifecycle managment
+    * Insert templates of indices and create related indices
+    * Create kibana index-patterns
+    * Create kibana vizualisations
+    * Create kibana dashboard
+- [ ] Add Beats agents to monitor the server
+- [ ] Automate the deployment
+- [ ] Modify scheduled task to have more relevant statistics
+- [ ] Create a public user interface to expose kibana dashboard
