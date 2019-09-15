@@ -1,8 +1,10 @@
 {
-  "index_patterns": "velocity-statistics",
+  "index_patterns": "velocity-statistics-*",
   "settings": {
     "number_of_shards": 1,
-    "number_of_replicas": 0
+    "number_of_replicas": 0,
+    "index.lifecycle.name": "velocity_generic_policy",
+    "index.lifecycle.rollover_alias": "velocity-statistics-alias-write"
   },
   "mappings" : {
     "dynamic": "strict",
@@ -47,35 +49,38 @@
           }
         }
       },
-      "total_stations" : {
-        "type" : "long"
+      "last_update" : {
+        "type" : "date"
       },
-      "total_open_stations" : {
-        "type" : "long"
-      },
-      "total_closed_stations" : {
+      "total_bikes_available" : {
         "type" : "long"
       },
       "total_bikes_capacity" : {
         "type" : "long"
       },
-      "total_bikes_available" : {
+      "total_bikes_used" : {
         "type" : "long"
       },
-      "total_bikes_used" : {
+      "total_closed_stations" : {
+        "type" : "long"
+      },
+      "total_open_stations" : {
         "type" : "long"
       },
       "total_stands_available" : {
         "type" : "long"
       },
-      "last_update" : {
-        "type" : "date"
+      "total_stations" : {
+        "type" : "long"
       }
     }
   },
   "aliases": {
-    "velocity-statistics-alias": {},
-    "velocity-statistics-alias-read": {},
-    "velocity-statistics-alia-write": {}
+    "velocity-statistics-alias-read": {
+      "is_write_index": false
+    },
+    "velocity-statistics-alias-write": {
+      "is_write_index": true
+    }
   }
 }

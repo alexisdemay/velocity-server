@@ -1,5 +1,6 @@
 package fr.velocity.task;
 
+import fr.velocity.config.AppDynamicProperties;
 import fr.velocity.document.Station;
 import fr.velocity.repository.StationsRepository;
 import fr.velocity.service.JCDecauxService;
@@ -12,10 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Slf4j
-@Component
+@Service
 public class StationsTask {
 
     @Autowired
@@ -25,18 +26,24 @@ public class StationsTask {
     private StationsRepository stationsRepository;
 
     @Autowired
+    private AppDynamicProperties appDynamicProperties;
+
+    @Autowired
     private ModelMapper mapper;
 
-    @Scheduled(fixedRate = 15000)
-    public void retrieveStationsTask() {
-        log.info("Retrieve stations at {}", Instant.now().toString());
-        List<Station> listOfStations = jcdecauxService
-                .listStations(Optional.empty())
-                .toStream()
-                .filter(Objects::nonNull)
-                .map(s -> mapper.map(s, Station.class))
-                .collect(Collectors.toList());
-        stationsRepository.insertList(listOfStations);
+    public void retrieveStations() {
+        if (appDynamicProperties != null
+                && appDynamicProperties.getTasks() != null
+                && appDynamicProperties.getTasks().getStations().isEnabled()) {
+            log.info("Retrieve stations at {}", Instant.now().toString());
+            List<Station> listOfStations = jcdecauxService
+                    .listStations(Optional.empty())
+                    .toStream()
+                    .filter(Objects::nonNull)
+                    .map(s -> mapper.map(s, Station.class))
+                    .collect(Collectors.toList());
+            stationsRepository.insertList(listOfStations);
+        }
     }
 
 }

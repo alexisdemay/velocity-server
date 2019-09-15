@@ -11,8 +11,6 @@ public @interface Document {
 
     String indexName();
 
-    String alias();
-
     String aliasRead();
 
     String aliasWrite();

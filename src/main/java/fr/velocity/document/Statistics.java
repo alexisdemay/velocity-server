@@ -3,20 +3,16 @@ package fr.velocity.document;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import fr.velocity.annotation.Document;
 import fr.velocity.deserializer.TimestampDeserialization;
-import fr.velocity.exception.DocumentException;
 import fr.velocity.serializer.LocalDateTimeSerializer;
 import java.time.Instant;
 import lombok.Data;
 
 @Document(
         indexName = Statistics.INDEX_NAME,
-        alias = Statistics.ALIAS,
         aliasRead = Statistics.ALIAS_READ,
         aliasWrite = Statistics.ALIAS_WRITE,
         type = Statistics.TYPE

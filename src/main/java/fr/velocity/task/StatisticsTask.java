@@ -1,5 +1,6 @@
 package fr.velocity.task;
 
+import fr.velocity.config.AppDynamicProperties;
 import fr.velocity.document.Statistics;
 import fr.velocity.repository.StatisticsRepository;
 import fr.velocity.service.JCDecauxService;
@@ -12,10 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Slf4j
-@Component
+@Service
 public class StatisticsTask {
 
     @Autowired
@@ -25,18 +26,24 @@ public class StatisticsTask {
     private StatisticsRepository statsStationsRepository;
 
     @Autowired
+    private AppDynamicProperties appDynamicProperties;
+
+    @Autowired
     private ModelMapper mapper;
 
-    @Scheduled(fixedRate = 15000)
-    public void retrieveStatisticsTask() {
-        log.info("Retrieve statistics at {}", Instant.now().toString());
-        List<Statistics> listOfStatistics = jcdecauxService
-                .statsStations(Optional.empty())
-                .stream()
-                .filter(Objects::nonNull)
-                .map(s -> mapper.map(s, Statistics.class))
-                .collect(Collectors.toList());
-        statsStationsRepository.insertList(listOfStatistics);
+    public void retrieveStatistics() {
+        if (appDynamicProperties != null
+                && appDynamicProperties.getTasks() != null
+                && appDynamicProperties.getTasks().getStatistics().isEnabled()) {
+            log.info("Retrieve statistics at {}", Instant.now().toString());
+            List<Statistics> listOfStatistics = jcdecauxService
+                    .statsStations(Optional.empty())
+                    .stream()
+                    .filter(Objects::nonNull)
+                    .map(s -> mapper.map(s, Statistics.class))
+                    .collect(Collectors.toList());
+            statsStationsRepository.insertList(listOfStatistics);
+        }
     }
 
 }

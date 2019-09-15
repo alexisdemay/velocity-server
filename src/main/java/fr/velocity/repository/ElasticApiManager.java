@@ -9,6 +9,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.DocWriteRequest.OpType;
 import org.elasticsearch.action.DocWriteResponse.Result;
+import org.elasticsearch.action.bulk.BulkItemResponse;
 import org.elasticsearch.action.bulk.BulkProcessor;
 import org.elasticsearch.action.bulk.BulkProcessor.Listener;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -85,23 +86,28 @@ public class ElasticApiManager {
             @Override
             public void beforeBulk(long executionId, BulkRequest request) {
                 int numberOfActions = request.numberOfActions();
-                log.debug("Executing bulk [{}] with {} requests",
+                log.debug("Executing bulk executionId={} with {} requests",
                         executionId, numberOfActions);
             }
             @Override
             public void afterBulk(long executionId, BulkRequest request,
                     BulkResponse response) {
                 if (response.hasFailures()) {
-                    log.warn("Bulk [{}] executed with failures", executionId);
+                    log.warn("Bulk executionId={} executed with failures", executionId);
+                    for (BulkItemResponse item : response.getItems()) {
+                        if (item.getFailureMessage() != null) {
+                            log.error("An error has occurred during indexing item id={}: {}", item.getId(), item.getFailureMessage());
+                        }
+                    }
                 } else {
-                    log.debug("Bulk [{}] completed in {} milliseconds",
+                    log.debug("Bulk executionId={} completed in {} milliseconds",
                             executionId, response.getTook().getMillis());
                 }
             }
             @Override
             public void afterBulk(long executionId, BulkRequest request,
                     Throwable failure) {
-                log.error("Failed to execute bulk", failure);
+                log.error("Failed to execute bulk executionId={}", executionId, failure);
             }
         };
     }
@@ -111,7 +117,7 @@ public class ElasticApiManager {
         IndexRequest indexRequest = new IndexRequest();
 
         indexRequest.id(UUID.randomUUID().toString());
-        indexRequest.index(DocumentHelper.getIndexName(document));
+        indexRequest.index(DocumentHelper.getAliasWrite(document));
         indexRequest.source(document.toJson(), XContentType.JSON);
         indexRequest.timeout(TimeValue.timeValueMinutes(ElasticApiManager.INDEX_REQUEST_TIMEOUT_IN_MIN));
         indexRequest.versionType(VersionType.INTERNAL);

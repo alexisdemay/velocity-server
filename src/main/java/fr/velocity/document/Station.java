@@ -17,7 +17,6 @@ import lombok.Data;
 
 @Document(
         indexName = Station.INDEX_NAME,
-        alias = Station.ALIAS,
         aliasRead = Station.ALIAS_READ,
         aliasWrite = Station.ALIAS_WRITE,
         type = Station.TYPE
@@ -27,8 +26,6 @@ import lombok.Data;
 public class Station extends AbstractDocument {
 
     public final static String INDEX_NAME = "velocity-stations";
-
-    public final static String ALIAS = "velocity-stations-alias";
 
     public final static String ALIAS_READ = "velocity-stations-alias-read";
 

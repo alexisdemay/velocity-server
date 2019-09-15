@@ -15,10 +15,6 @@ public final class DocumentHelper {
         return validateDocumentAnnotation(object).getAnnotation(Document.class).indexName();
     }
 
-    public static <T extends AbstractDocument> String getAlias(T object) {
-        return validateDocumentAnnotation(object).getAnnotation(Document.class).alias();
-    }
-
     public static <T extends AbstractDocument> String getAliasRead(T object) {
         return validateDocumentAnnotation(object).getAnnotation(Document.class).aliasRead();
     }

@@ -1,6 +1,6 @@
 package fr.velocity.client;
 
-import fr.velocity.config.AppProperties;
+import fr.velocity.config.AppDefaultProperties;
 import fr.velocity.model.Contract;
 import fr.velocity.model.Station;
 import lombok.extern.slf4j.Slf4j;
@@ -23,13 +23,13 @@ public class JCDecauxClient {
     private final String apiKey;
 
     @Autowired
-    public JCDecauxClient(AppProperties appProperties) {
+    public JCDecauxClient(AppDefaultProperties appDefaultProperties) {
         this.webClient = WebClient
                 .builder()
-                .baseUrl(appProperties.getJcdecaux().getBaseUrl())
+                .baseUrl(appDefaultProperties.getJcdecaux().getBaseUrl())
                 .filter(logRequest())
                 .build();
-        this.apiKey = appProperties.getJcdecaux().getApiKey();
+        this.apiKey = appDefaultProperties.getJcdecaux().getApiKey();
     }
 
     public Flux<Contract> listContracts() {

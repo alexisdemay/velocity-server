@@ -2,16 +2,12 @@ package fr.velocity.document;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.velocity.annotation.Document;
-import fr.velocity.exception.DocumentException;
 import java.util.List;
 import lombok.Data;
 
 @Document(
         indexName = Contract.INDEX_NAME,
-        alias = Contract.ALIAS,
         aliasRead = Contract.ALIAS_READ,
         aliasWrite = Contract.ALIAS_WRITE,
         type = Contract.TYPE
@@ -21,8 +17,6 @@ import lombok.Data;
 public class Contract extends AbstractDocument {
 
     public final static String INDEX_NAME = "velocity-contracts";
-
-    public final static String ALIAS = "velocity-contracts-alias";
 
     public final static String ALIAS_READ = "velocity-contracts-alias-read";
 

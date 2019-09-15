@@ -1,6 +1,6 @@
 package fr.velocity;
 
-import fr.velocity.config.AppProperties;
+import fr.velocity.config.AppDefaultProperties;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +12,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.elasticsearch.rest.RestClientAutoConfiguration;
@@ -22,7 +23,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Slf4j
 @SpringBootApplication(exclude = RestClientAutoConfiguration.class)
 @EnableScheduling
-@EnableConfigurationProperties(AppProperties.class)
+@EnableConfigurationProperties(AppDefaultProperties.class)
 public class VelocityApplication {
 
     private static final String PID_FILE_PATH = "pid_file_path";
@@ -32,7 +33,12 @@ public class VelocityApplication {
         SpringApplication velocityApp = new SpringApplication(VelocityApplication.class);
         Map<String, Object> parameters = getArgs(args);
 
-        velocityApp.addListeners(new ApplicationPidFileWriter((File) parameters.get(PID_FILE_PATH)));
+        File pidFile = parameters.get(PID_FILE_PATH) != null && parameters.get(PID_FILE_PATH) instanceof File ? (File) parameters.get(PID_FILE_PATH) : null;
+
+        if (pidFile != null) {
+            velocityApp.addListeners(new ApplicationPidFileWriter(pidFile));
+        }
+
         velocityApp.run(args);
 
     }
@@ -59,7 +65,9 @@ public class VelocityApplication {
 
         String pathPidFile = commandLine.getOptionValue("pid-file");
 
-        argsMap.put(PID_FILE_PATH, new File(pathPidFile));
+        if (StringUtils.isNotBlank(pathPidFile)) {
+            argsMap.put(PID_FILE_PATH, new File(pathPidFile));
+        }
 
         return argsMap;
 
