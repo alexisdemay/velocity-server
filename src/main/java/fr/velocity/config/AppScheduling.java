@@ -2,7 +2,9 @@ package fr.velocity.config;
 
 import fr.velocity.task.StationsTask;
 import fr.velocity.task.StatisticsTask;
+
 import java.util.Date;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -15,14 +17,21 @@ import org.springframework.scheduling.support.PeriodicTrigger;
 @Configuration
 public class AppScheduling implements SchedulingConfigurer {
 
-    @Autowired
-    private StationsTask stationsTask;
+    private final StationsTask stationsTask;
+
+    private final StatisticsTask statisticsTask;
+
+    private final AppDefaultProperties appDefaultProperties;
+
+    private final AppDynamicProperties appDynamicProperties;
 
     @Autowired
-    private StatisticsTask statisticsTask;
-
-    @Autowired
-    private AppDynamicProperties appDynamicProperties;
+    public AppScheduling(StationsTask stationsTask, StatisticsTask statisticsTask, AppDefaultProperties appDefaultProperties, AppDynamicProperties appDynamicProperties) {
+        this.stationsTask = stationsTask;
+        this.statisticsTask = statisticsTask;
+        this.appDefaultProperties = appDefaultProperties;
+        this.appDynamicProperties = appDynamicProperties;
+    }
 
     @Override
     public void configureTasks(ScheduledTaskRegistrar scheduledTaskRegistrar) {
@@ -45,9 +54,24 @@ public class AppScheduling implements SchedulingConfigurer {
     }
 
     private Date getTriggerContext(TriggerContext triggerContext, Long fixedRate, String taskName) {
-        PeriodicTrigger periodicTrigger = new PeriodicTrigger(fixedRate);
-        Date nextExec = periodicTrigger.nextExecutionTime(triggerContext);
-        log.info("Next execution of {} is scheduled at {}", taskName, nextExec.toString());
+        boolean isEnableTask = false;
+        if (appDynamicProperties != null && appDynamicProperties.getTasks() != null) {
+            if (taskName == StationsTask.class.getSimpleName()) {
+                isEnableTask = appDynamicProperties.getTasks().getStations().isEnabled();
+            } else if (taskName == StatisticsTask.class.getSimpleName()) {
+                isEnableTask = appDynamicProperties.getTasks().getStatistics().isEnabled();
+            }
+        }
+        Date nextExec;
+        if (isEnableTask) {
+            PeriodicTrigger periodicTrigger = new PeriodicTrigger(fixedRate);
+            nextExec = periodicTrigger.nextExecutionTime(triggerContext);
+            log.info("Next execution of {} is scheduled at {}", taskName, nextExec.toString());
+        } else {
+            PeriodicTrigger periodicTrigger = new PeriodicTrigger(appDefaultProperties.getTasks().getDefaultFixedRate());
+            nextExec = periodicTrigger.nextExecutionTime(triggerContext);
+            log.warn("{} is disabled and the next execution is scheduled at {}", taskName, nextExec.toString());
+        }
         return nextExec;
     }
 

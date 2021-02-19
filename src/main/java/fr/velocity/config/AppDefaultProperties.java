@@ -31,6 +31,7 @@ public class AppDefaultProperties {
     public static class Tasks {
         private Stations stations;
         private Statistics statistics;
+        private long defaultFixedRate;
         @Data
         public static class Stations {
 

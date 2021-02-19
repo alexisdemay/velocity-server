@@ -19,17 +19,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class StationsTask {
 
-    @Autowired
-    private JCDecauxService jcdecauxService;
+    private final JCDecauxService jcdecauxService;
+
+    private final StationsRepository stationsRepository;
+
+    private final AppDynamicProperties appDynamicProperties;
+
+    private final ModelMapper mapper;
 
     @Autowired
-    private StationsRepository stationsRepository;
-
-    @Autowired
-    private AppDynamicProperties appDynamicProperties;
-
-    @Autowired
-    private ModelMapper mapper;
+    public StationsTask(JCDecauxService jcdecauxService, StationsRepository stationsRepository, AppDynamicProperties appDynamicProperties, ModelMapper mapper) {
+        this.jcdecauxService = jcdecauxService;
+        this.stationsRepository = stationsRepository;
+        this.appDynamicProperties = appDynamicProperties;
+        this.mapper = mapper;
+    }
 
     public void retrieveStations() {
         if (appDynamicProperties != null
