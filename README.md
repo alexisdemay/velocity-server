@@ -21,7 +21,7 @@
 ## About The Project
 
 <p align="center">
-  <img width="100%" height="100%" src="https://github.com/alexisdemay/velocity-server/blob/master/img/kibana_dashboard_velocity_statistics.png">
+  <img width="100%" height="100%" src="https://github.com/alexisdemay/velocity-server/blob/main/img/kibana_dashboard_velocity_statistics.png">
 </p>
 
 Spring Boot server that uses JCDecaux API to perform statistics and vizualize them in Kibana.
