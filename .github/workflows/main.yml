@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout project
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Cache Maven packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+      - name: Extract Maven project version
+        run: echo "RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+
+      - name: Prepare SSH to work with the remote server
+        run: |
+          cd ~ && mkdir .ssh &&
+          touch ~/.ssh/known_hosts &&
+          echo "${{ secrets.DEPLOY_SSH_HOSTKEY }}" > ~/.ssh/known_hosts
+          sudo chown $USER:$USER /home/runner/work/velocity-server/velocity-server/target/velocity-${{ env.RELEASE_VERSION }}.tar.gz
+
+      - name: Deploy project to server
+        uses: alexisdemay/ssh-deploy@master
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+          DEPLOY_KEY_NAME: ${{ secrets.DEPLOY_KEY_NAME }}
+          SOURCE: "target/velocity-${{ env.RELEASE_VERSION }}.tar.gz"
+          TARGET: ${{ secrets.TARGET }}
